@@ -3,6 +3,8 @@ package lab1_202_12.uwaterloo.ca.lab2_202_12;
 import ca.uwaterloo.sensortoy.*;
 
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     //  Make the line graph, sensor event listeners, and array for accelerometer data global variables
     LineGraphView graph;
     AccelerometerSensorEventListener aSel;
+    LinearAccelermeterSensorEventListener lin;
 
 
     double accData[][] = new double[100][3];
@@ -104,13 +107,6 @@ public class MainActivity extends AppCompatActivity {
         tv2.setTextColor(getResources().getColor(white));
         l.addView(tv2);
 
-        TextView tv3 = new TextView(getApplicationContext());
-        tv3.setTextColor(getResources().getColor(white));
-        l.addView(tv3);
-
-        TextView tv4 = new TextView(getApplicationContext());
-        tv4.setTextColor(getResources().getColor(white));
-        l.addView(tv4);
 
         // Declare a Sensor Manager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -121,13 +117,42 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Acceleration Sensor Event Listener
-        Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        aSel = new AccelerometerSensorEventListener(tv2, graph, accData);
+        Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        aSel = new AccelerometerSensorEventListener(tv1, graph, accData);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
 
-
+        //Linear Accel. Event Listener
+        Sensor linaccSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        lin = new LinearAccelermeterSensorEventListener(tv2);
+        sensorManager.registerListener(lin, linaccSensor, sensorManager.SENSOR_DELAY_GAME);
 
 
     }
 }
+class LinearAccelermeterSensorEventListener implements SensorEventListener {
+
+    private TextView output;
+
+
+    public LinearAccelermeterSensorEventListener (TextView t){
+
+
+        output = t;
+    }
+    public void onAccuracyChanged(Sensor s, int i) { }
+
+
+    public void onSensorChanged(SensorEvent se) {
+
+        double x = se.values[0];
+        double y = se.values[1];
+        double z = se.values[2];
+        String outS = String.format("(%f, %f, %f)", x, y, z);
+        output.setText("\nLinear Acceleration: " + outS );
+
+    }
+
+
+}
+
 
