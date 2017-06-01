@@ -29,18 +29,18 @@ public class MainActivity extends AppCompatActivity {
     LinearAccelermeterSensorEventListener lin;
 
 
-    double accData[][] = new double[100][3];
+    float accData[][] = new float[100][3];
 
     //  Clear the max data from all sensor event handlers
-    private void clearMaxData(AccelerometerSensorEventListener a) {
-        a.setHighestX(0);
-        a.setHighestY(0);
-        a.setHighestZ(0);
-
-    }
+//    private void clearMaxData(AccelerometerSensorEventListener a) {
+//        a.setHighestX(0);
+//        a.setHighestY(0);
+//        a.setHighestZ(0);
+//
+//    }
 
     //  Write to a CSV file given a 2 dimensional double array of size [100][3]
-    private void writeToFile(double data[][]) {
+    private void writeToFile(float data[][]) {
 
         //  Save to "data.csv" in app folder "Data"
         File file = new File(getExternalFilesDir("Data"), "data.csv");
@@ -75,16 +75,16 @@ public class MainActivity extends AppCompatActivity {
         graph.setVisibility(View.VISIBLE);
 
         // Clear max data button
-        Button clearDataBtn = new Button(getApplicationContext());
-        clearDataBtn.setText("Clear Max Data");
-        l.addView(clearDataBtn);
-
-        clearDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearMaxData(aSel);
-            }
-        });
+//        Button clearDataBtn = new Button(getApplicationContext());
+//        clearDataBtn.setText("Clear Max Data");
+//        l.addView(clearDataBtn);
+//
+//        clearDataBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clearMaxData(aSel);
+//            }
+//        });
 
         //  Write accelerometer data to file button
         Button writeFile = new Button(getApplicationContext());
