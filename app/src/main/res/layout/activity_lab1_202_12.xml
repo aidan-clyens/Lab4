@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout"
-        tools:context="lab1_202_12.uwaterloo.ca.lab1_202_12.Lab1_202_12">
+        tools:context="lab1_202_12.uwaterloo.ca.lab2_202_12.Lab1_202_12">
 
     </LinearLayout>
 </ScrollView>
