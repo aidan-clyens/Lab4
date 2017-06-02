@@ -3,8 +3,6 @@ package lab1_202_12.uwaterloo.ca.lab2_202_12;
 import ca.uwaterloo.sensortoy.*;
 
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,18 +24,9 @@ public class MainActivity extends AppCompatActivity {
     //  Make the line graph, sensor event listeners, and array for accelerometer data global variables
     LineGraphView graph;
     AccelerometerSensorEventListener aSel;
-    LinearAccelermeterSensorEventListener lin;
 
 
     float accData[][] = new float[100][3];
-
-    //  Clear the max data from all sensor event handlers
-//    private void clearMaxData(AccelerometerSensorEventListener a) {
-//        a.setHighestX(0);
-//        a.setHighestY(0);
-//        a.setHighestZ(0);
-//
-//    }
 
     //  Write to a CSV file given a 2 dimensional double array of size [100][3]
     private void writeToFile(float data[][]) {
@@ -74,18 +63,6 @@ public class MainActivity extends AppCompatActivity {
         l.addView(graph);
         graph.setVisibility(View.VISIBLE);
 
-        // Clear max data button
-//        Button clearDataBtn = new Button(getApplicationContext());
-//        clearDataBtn.setText("Clear Max Data");
-//        l.addView(clearDataBtn);
-//
-//        clearDataBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                clearMaxData(aSel);
-//            }
-//        });
-
         //  Write accelerometer data to file button
         Button writeFile = new Button(getApplicationContext());
         writeFile.setText("Generate CSV for Acc Data");
@@ -113,46 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
         //  Declaration of sensor event listeners
 
-
-
-
         // Acceleration Sensor Event Listener
         Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         aSel = new AccelerometerSensorEventListener(tv1, graph, accData);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
 
-        //Linear Accel. Event Listener
-        Sensor linaccSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        lin = new LinearAccelermeterSensorEventListener(tv2);
-        sensorManager.registerListener(lin, linaccSensor, sensorManager.SENSOR_DELAY_GAME);
-
-
     }
-}
-class LinearAccelermeterSensorEventListener implements SensorEventListener {
-
-    private TextView output;
-
-
-    public LinearAccelermeterSensorEventListener (TextView t){
-
-
-        output = t;
-    }
-    public void onAccuracyChanged(Sensor s, int i) { }
-
-
-    public void onSensorChanged(SensorEvent se) {
-
-        double x = se.values[0];
-        double y = se.values[1];
-        double z = se.values[2];
-        String outS = String.format("(%f, %f, %f)", x, y, z);
-        output.setText("\nLinear Acceleration: " + outS );
-
-    }
-
-
 }
 
 

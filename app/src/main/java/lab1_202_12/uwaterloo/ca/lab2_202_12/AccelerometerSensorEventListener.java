@@ -12,7 +12,7 @@ import ca.uwaterloo.sensortoy.LineGraphView;
  */
 class AccelerometerSensorEventListener implements SensorEventListener {
 
-    private final double SMOOTHING_CONST = 30;
+    private final double SMOOTHING_CONST = 20;
 
     private TextView output;
     private LineGraphView graph;
