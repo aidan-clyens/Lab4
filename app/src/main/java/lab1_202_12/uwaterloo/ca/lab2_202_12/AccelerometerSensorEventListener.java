@@ -19,11 +19,14 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
     private float vals[][] = new float[100][3];
 
+    MotionFSM accellFSM;
+
     //  AccelerometerSensorEventListener Constructor
-    public AccelerometerSensorEventListener(TextView outputView, LineGraphView graphView, float data[][]) {
+    public AccelerometerSensorEventListener(TextView outputView, LineGraphView graphView, float data[][], MotionFSM acc) {
         graph = graphView;
         output = outputView;
         vals = data;
+        accellFSM = acc;
     }
 
     public void setReading(float[] reading) {
@@ -52,7 +55,7 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
 
             graph.addPoint(vals[0]);
-
+            accellFSM.runFSM(vals[0]);
             output.setText(String.format("(%f, %f, %f)", vals[0][0], vals[0][1], vals[0][2]));
 
         }
