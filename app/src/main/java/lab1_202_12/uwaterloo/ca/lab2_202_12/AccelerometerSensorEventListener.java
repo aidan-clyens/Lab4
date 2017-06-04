@@ -44,7 +44,7 @@ class AccelerometerSensorEventListener implements SensorEventListener {
     public void onAccuracyChanged(Sensor s, int i) { }
 
     public void onSensorChanged(SensorEvent se) {
-        if(se.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        if(se.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
 
             //  Shift the index of each column of the acceleration data array up by 1 and write to the start of the array
 
