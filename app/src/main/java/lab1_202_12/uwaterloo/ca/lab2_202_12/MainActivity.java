@@ -95,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         aSel = new AccelerometerSensorEventListener(tv1, graph, accData);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
 
+        DirectionFSM xDir = new DirectionFSM(tv2);
+
+        xDir.runFSM(aSel.getVal());
+
     }
 }
 

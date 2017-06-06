@@ -26,7 +26,12 @@ class AccelerometerSensorEventListener implements SensorEventListener {
         vals = data;
     }
 
-    public void setReading(float[] reading) {
+    public float getVal() {
+
+        return vals[0][0];
+    }
+
+    private void setReading(float[] reading) {
 
         for (int i=98; i>=0; i--) {
             vals[i+1][0] = vals[i][0];
