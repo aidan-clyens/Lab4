@@ -16,8 +16,8 @@ public class DirectionFSM {
     private Directions direction;
     private UpDownStates riseFall;
 
-    private final float THRESHOLD_RIGHT[] = {0.3f, 1.0f};
-    private final float THRESHOLD_LEFT[] = {-0.3f, -1.0f};
+    private final float THRESHOLD_RIGHT[] = {0.5f, 1.3f};
+    private final float THRESHOLD_LEFT[] = {-0.5f, -1.3f};
     private final float ZERO_THRESHOLD = 0.3f;
 
     private final int SAMPLE_COUNT = 30;
