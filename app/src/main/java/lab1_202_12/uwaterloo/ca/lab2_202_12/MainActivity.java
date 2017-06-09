@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         aSel = new AccelerometerSensorEventListener(tv1, graph, accData, xDir, yDir);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
 
-
     }
 }
 

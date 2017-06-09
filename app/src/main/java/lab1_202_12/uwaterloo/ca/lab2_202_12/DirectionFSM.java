@@ -16,9 +16,9 @@ public class DirectionFSM {
     private Directions direction;
     private UpDownStates riseFall;
 
-    private final float THRESHOLD_RIGHT[] = {0.5f, 1.3f};
-    private final float THRESHOLD_LEFT[] = {-0.5f, -1.3f};
-    private final float ZERO_THRESHOLD = 0.3f;
+    private final float THRESHOLD_RIGHT[] = {0.1f, 1.3f};
+    private final float THRESHOLD_LEFT[] = {-0.1f, -1.3f};
+    private final float ZERO_THRESHOLD = 0.5f;
 
     private final int SAMPLE_COUNT = 30;
 
@@ -29,7 +29,6 @@ public class DirectionFSM {
     private float prevVal = 0;
 
     public DirectionFSM(TextView tv) {
-
         state = States.WAIT;
         direction = Directions.UNDETERMINED;
         riseFall = UpDownStates.UNDETERMINED;
