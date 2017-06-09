@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 public class DirectionFSM {
 
-    enum States{WAIT, RISE, FALL, STABLE, DETERMINED}
-    enum Directions{UNDETERMINED, RIGHT, LEFT}
-    enum UpDownStates{UNDETERMINED, RISE, FALL}
+    private enum States{WAIT, RISE, FALL, STABLE, DETERMINED}
+    private enum Directions{UNDETERMINED, RIGHT, LEFT, UP, DOWN}
+    private enum UpDownStates{UNDETERMINED, RISE, FALL}
 
     private States state;
     private Directions direction;
@@ -28,12 +28,16 @@ public class DirectionFSM {
 
     private float prevVal = 0;
 
-    public DirectionFSM(TextView tv) {
+    // 0 is x-axis and 1 is y-axis
+    boolean axis = false;
+
+    public DirectionFSM(TextView tv, boolean a) {
         state = States.WAIT;
         direction = Directions.UNDETERMINED;
         riseFall = UpDownStates.UNDETERMINED;
         count = SAMPLE_COUNT;
         display = tv;
+        axis = a;
     }
 
     private void resetFSM() {
@@ -108,10 +112,14 @@ public class DirectionFSM {
 
                         if(riseFall == UpDownStates.RISE) {
 
-                            direction = Directions.RIGHT;
+                            if(axis) direction = Directions.UP;
+                            else direction = Directions.RIGHT;
+
                         } else if(riseFall == UpDownStates.FALL) {
 
-                            direction = Directions.LEFT;
+                            if(axis) direction = Directions.DOWN;
+                            else direction = Directions.LEFT;
+
                         }
                     } else {
 

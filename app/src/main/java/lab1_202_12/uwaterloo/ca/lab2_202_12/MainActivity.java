@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         tv3.setTextColor(getResources().getColor(white));
         l.addView(tv3);
 
-        DirectionFSM xDir = new DirectionFSM(tv2);
-        DirectionFSM yDir = new DirectionFSM(tv3);
+        DirectionFSM xDir = new DirectionFSM(tv2, false);
+        DirectionFSM yDir = new DirectionFSM(tv3, true);
 
 
         // Declare a Sensor Manager

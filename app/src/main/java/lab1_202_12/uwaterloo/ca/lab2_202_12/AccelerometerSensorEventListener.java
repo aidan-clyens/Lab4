@@ -44,7 +44,6 @@ class AccelerometerSensorEventListener implements SensorEventListener {
         vals[0][2] += (reading[2] - vals[0][2]) / SMOOTHING_CONST;
     }
 
-    //  Setters allow the stored max values of data to be set to a specified value
 
     public void onAccuracyChanged(Sensor s, int i) { }
 
