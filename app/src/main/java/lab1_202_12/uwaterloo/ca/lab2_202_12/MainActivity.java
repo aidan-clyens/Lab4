@@ -84,7 +84,12 @@ public class MainActivity extends AppCompatActivity {
         tv2.setTextColor(getResources().getColor(white));
         l.addView(tv2);
 
+        TextView tv3 = new TextView(getApplicationContext());
+        tv3.setTextColor(getResources().getColor(white));
+        l.addView(tv3);
+
         DirectionFSM xDir = new DirectionFSM(tv2);
+        DirectionFSM yDir = new DirectionFSM(tv3);
 
 
         // Declare a Sensor Manager
@@ -94,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Acceleration Sensor Event Listener
         Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        aSel = new AccelerometerSensorEventListener(tv1, graph, accData, xDir);
+        aSel = new AccelerometerSensorEventListener(tv1, graph, accData, xDir, yDir);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
 
 
