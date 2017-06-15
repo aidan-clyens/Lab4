@@ -97,11 +97,14 @@ public class MainActivity extends AppCompatActivity {
         // Declare a Sensor Manager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-
-        // Acceleration Sensor Event Listener, pass through the direction FSM objects
-        Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        aSel = new AccelerometerSensorEventListener(tv1, graph, accData, xDir, yDir);
+        //  Declaration of sensor event listeners
+        MotionFSM accelFSM = new MotionFSM( tv2);
+        // Acceleration Sensor Event Listener
+        Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        aSel = new AccelerometerSensorEventListener(tv1, graph, accData, accelFSM);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
+
+
 
     }
 }

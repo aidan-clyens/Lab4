@@ -12,23 +12,21 @@ import ca.uwaterloo.sensortoy.LineGraphView;
  */
 class AccelerometerSensorEventListener implements SensorEventListener {
 
-    private final double SMOOTHING_CONST = 25;
+    private final double SMOOTHING_CONST = 15;
 
     private TextView output;
     private LineGraphView graph;
 
     private float vals[][] = new float[100][3];
 
-    private DirectionFSM xDir;
-    private DirectionFSM yDir;
+    MotionFSM accellFSM;
 
     //  AccelerometerSensorEventListener Constructor
-    public AccelerometerSensorEventListener(TextView outputView, LineGraphView graphView, float data[][], DirectionFSM x, DirectionFSM y) {
+    public AccelerometerSensorEventListener(TextView outputView, LineGraphView graphView, float data[][], MotionFSM acc) {
         graph = graphView;
         output = outputView;
         vals = data;
-        xDir = x;
-        yDir = y;
+        accellFSM = acc;
     }
 
     //  Filter the raw accelerometer data and store it in an array
@@ -58,11 +56,8 @@ class AccelerometerSensorEventListener implements SensorEventListener {
             //  Smooth accelerometer readings
             graph.addPoint(vals[0]);
 
-            //  Run the x-direction and y-direction FSMs for each current x and y value
-            xDir.runFSM(vals[0][0]);
-            yDir.runFSM(vals[0][1]);
-
-//            output.setText(String.format("(%f, %f, %f)", vals[0][0], vals[0][1], vals[0][2]));
+            accellFSM.runFSM(vals[0]);
+            output.setText(String.format("(%f, %f, %f)", vals[0][0], vals[0][1], vals[0][2]));
 
         }
     }
