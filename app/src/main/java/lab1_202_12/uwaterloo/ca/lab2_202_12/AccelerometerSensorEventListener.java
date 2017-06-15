@@ -31,6 +31,7 @@ class AccelerometerSensorEventListener implements SensorEventListener {
         yDir = y;
     }
 
+    //  Filter the raw accelerometer data and store it in an array
     private void setReading(float[] reading) {
 
         for (int i=98; i>=0; i--) {
@@ -54,9 +55,10 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
             setReading(se.values);
 
-
+            //  Smooth accelerometer readings
             graph.addPoint(vals[0]);
 
+            //  Run the x-direction and y-direction FSMs for each current x and y value
             xDir.runFSM(vals[0][0]);
             yDir.runFSM(vals[0][1]);
 

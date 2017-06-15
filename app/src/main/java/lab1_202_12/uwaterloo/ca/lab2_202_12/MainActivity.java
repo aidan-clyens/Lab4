@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         tv3.setTextColor(getResources().getColor(white));
         l.addView(tv3);
 
+
+        //  x-direction and y-direction finite state machines
         DirectionFSM xDir = new DirectionFSM(tv2, false);
         DirectionFSM yDir = new DirectionFSM(tv3, true);
 
@@ -95,9 +97,8 @@ public class MainActivity extends AppCompatActivity {
         // Declare a Sensor Manager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        //  Declaration of sensor event listeners
 
-        // Acceleration Sensor Event Listener
+        // Acceleration Sensor Event Listener, pass through the direction FSM objects
         Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         aSel = new AccelerometerSensorEventListener(tv1, graph, accData, xDir, yDir);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);

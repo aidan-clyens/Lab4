@@ -40,6 +40,7 @@ public class DirectionFSM {
         axis = a;
     }
 
+    //  Completely reset the FSM
     private void resetFSM() {
 
         state = States.WAIT;
@@ -48,12 +49,14 @@ public class DirectionFSM {
         count = SAMPLE_COUNT;
     }
 
+    //  Run the FSM for the given float value
     public void runFSM(float val) {
 
         float slope = val - prevVal;
 
         switch(state) {
 
+            //  Wait for the slope to rise or fall
             case WAIT:
 
                 if(slope >= THRESHOLD_RIGHT[0]) {
@@ -66,6 +69,7 @@ public class DirectionFSM {
 
                 break;
 
+            //  If the slope rises, start testing for a right/up gesture
             case RISE:
 
                 if(slope <= 0) {
@@ -83,6 +87,7 @@ public class DirectionFSM {
 
                 break;
 
+            //  If slope falls, start testing for a left/down gesture
             case FALL:
 
                 if(slope >= 0) {
@@ -100,6 +105,7 @@ public class DirectionFSM {
 
                 break;
 
+            //  The curve has reached a maximum value and returns to 0
             case STABLE:
 
                 count--;
@@ -129,6 +135,7 @@ public class DirectionFSM {
 
                 break;
 
+            // The direction has been determined
             case DETERMINED:
 
                 display.setText(direction.toString());
