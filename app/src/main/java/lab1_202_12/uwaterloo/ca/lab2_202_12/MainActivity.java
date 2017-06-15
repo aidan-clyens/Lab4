@@ -89,11 +89,6 @@ public class MainActivity extends AppCompatActivity {
         l.addView(tv3);
 
 
-        //  x-direction and y-direction finite state machines
-        DirectionFSM xDir = new DirectionFSM(tv2, false);
-        DirectionFSM yDir = new DirectionFSM(tv3, true);
-
-
         // Declare a Sensor Manager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
