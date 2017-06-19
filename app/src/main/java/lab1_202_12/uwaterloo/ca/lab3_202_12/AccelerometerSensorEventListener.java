@@ -5,8 +5,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.widget.TextView;
 
-import ca.uwaterloo.sensortoy.LineGraphView;
-
 /**
  * Created by aidan on 6/1/2017.
  */
@@ -15,15 +13,13 @@ class AccelerometerSensorEventListener implements SensorEventListener {
     private final double SMOOTHING_CONST = 15;
 
     private TextView output;
-    private LineGraphView graph;
 
     private float vals[][] = new float[100][3];
 
     MotionFSM accellFSM;
 
     //  AccelerometerSensorEventListener Constructor
-    public AccelerometerSensorEventListener(TextView outputView, LineGraphView graphView, float data[][], MotionFSM acc) {
-        graph = graphView;
+    public AccelerometerSensorEventListener(TextView outputView, float data[][], MotionFSM acc) {
         output = outputView;
         vals = data;
         accellFSM = acc;
@@ -54,8 +50,6 @@ class AccelerometerSensorEventListener implements SensorEventListener {
             setReading(se.values);
 
             //  Smooth accelerometer readings
-            graph.addPoint(vals[0]);
-
             accellFSM.runFSM(vals[0]);
             output.setText(String.format("(%f, %f, %f)", vals[0][0], vals[0][1], vals[0][2]));
 
