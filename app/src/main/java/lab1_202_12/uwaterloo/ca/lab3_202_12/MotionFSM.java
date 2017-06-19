@@ -1,9 +1,7 @@
-package lab1_202_12.uwaterloo.ca.lab2_202_12;
+package lab1_202_12.uwaterloo.ca.lab3_202_12;
 
 import android.util.Log;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Evan on 6/2/2017.
