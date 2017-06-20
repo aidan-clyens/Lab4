@@ -5,6 +5,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import static android.R.color.white;
@@ -12,6 +13,8 @@ import static android.R.color.white;
 public class MainActivity extends AppCompatActivity {
     //  Make the line graph, sensor event listeners, and array for accelerometer data global variables
     AccelerometerSensorEventListener aSel;
+
+    private int [] GAMEBOARD_DIMENSION  = { 1440,  2560}; //width, height to be chnged to phone
 
 
     float accData[][] = new float[100][3];
@@ -21,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab1_202_12);
 
-        LinearLayout l = (LinearLayout) findViewById(R.id.linearLayout);
-        l.setOrientation(LinearLayout.VERTICAL);
+        RelativeLayout l = (RelativeLayout) findViewById(R.id.relativeLayout);
+        //l.setOrientation(RelativeLayout.VERTICAL); <- don't need?
+        l.getLayoutParams().width = GAMEBOARD_DIMENSION[0];
+        l.getLayoutParams().height = GAMEBOARD_DIMENSION[1]; //set layout dimensions
 
         // TextViews 1 - 4
         TextView tv1 = new TextView(getApplicationContext());

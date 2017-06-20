@@ -6,12 +6,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout"
+        android:id="@+id/relativeLayout"
         tools:context="lab1_202_12.uwaterloo.ca.lab3_202_12.Lab1_202_12">
 
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
