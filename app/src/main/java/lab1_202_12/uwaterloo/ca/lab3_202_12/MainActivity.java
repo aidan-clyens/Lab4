@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     //  Make the line graph, sensor event listeners, and array for accelerometer data global variables
     AccelerometerSensorEventListener aSel;
 
-    private int [] GAMEBOARD_DIMENSION  = { 1440,  2560}; //width, height to be chnged to phone
+    private final int [] GAMEBOARD_DIMENSION  = { 1080,  1080 }; //width, height to be chnged to phone
 
 
     float accData[][] = new float[100][3];
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         //l.setOrientation(RelativeLayout.VERTICAL); <- don't need?
         l.getLayoutParams().width = GAMEBOARD_DIMENSION[0];
         l.getLayoutParams().height = GAMEBOARD_DIMENSION[1]; //set layout dimensions
+        l.setBackgroundResource(R.drawable.gameboard);
 
         // TextViews 1 - 4
         TextView tv1 = new TextView(getApplicationContext());
