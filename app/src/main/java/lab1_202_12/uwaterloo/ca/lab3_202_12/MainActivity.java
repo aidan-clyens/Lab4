@@ -4,7 +4,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         l.getLayoutParams().height = GAMEBOARD_DIMENSION[1]; //set layout dimensions
         l.setBackgroundResource(R.drawable.gameboard);
 
-        // TextViews 1 - 4
+        // TextViews 1 - 2
         TextView tv1 = new TextView(getApplicationContext());
         tv1.setTextColor(getResources().getColor(white));
         l.addView(tv1);
@@ -38,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
         TextView tv2 = new TextView(getApplicationContext());
         tv2.setTextColor(getResources().getColor(white));
         l.addView(tv2);
-
-        TextView tv3 = new TextView(getApplicationContext());
-        tv3.setTextColor(getResources().getColor(white));
-        l.addView(tv3);
 
 
         // Declare a Sensor Manager
