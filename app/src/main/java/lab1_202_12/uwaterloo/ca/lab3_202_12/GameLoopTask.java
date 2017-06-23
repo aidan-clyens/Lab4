@@ -2,6 +2,7 @@ package lab1_202_12.uwaterloo.ca.lab3_202_12;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import java.util.TimerTask;
@@ -20,9 +21,33 @@ public class GameLoopTask extends TimerTask {
         myActivity = myAct;
         myContext = myCon;
         myRL = rl;
+
+        createBlock();
     }
 
-    public void run() {
+    private int i = 1;
+    private int sec = 0;
 
+    public void run() {
+        myActivity.runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        //  Do something - Test
+                        if ((i % 20) == 0) {
+                            Log.d("Test", String.format("%d", sec));
+                            sec++;
+                        }
+
+                        i++;
+                    }
+                }
+        );
+    }
+
+    private void createBlock() {
+
+        GameBlock newBlock = new GameBlock(myContext, 1080, 1080);
+        myRL.addView(newBlock);
     }
 }
