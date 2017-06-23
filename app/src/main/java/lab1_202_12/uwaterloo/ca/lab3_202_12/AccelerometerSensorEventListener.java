@@ -16,13 +16,16 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
     private float vals[][] = new float[100][3];
 
-    MotionFSM accellFSM;
+    private MotionFSM accellFSM;
+
+    private GameLoopTask gl;
 
     //  AccelerometerSensorEventListener Constructor
-    public AccelerometerSensorEventListener(TextView outputView, float data[][], MotionFSM acc) {
+    public AccelerometerSensorEventListener(TextView outputView, float data[][], MotionFSM acc,GameLoopTask myGL) {
         output = outputView;
         vals = data;
         accellFSM = acc;
+        gl = myGL;
     }
 
     //  Filter the raw accelerometer data and store it in an array

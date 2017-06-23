@@ -13,8 +13,8 @@ public class MotionFSM {
     private States signalState;
 
 
-    enum direction{ Left, Right,Up, Down, Undetermined};
-    private direction dirs;
+    enum directions{ Left, Right,Up, Down, Undetermined};
+    private directions dirs;
 
 
     private final float[] threshHolds = {0.5f, 1f, 0.4f};
@@ -31,7 +31,7 @@ public class MotionFSM {
     {
         count = countDefault;
         signalState = States.Waiting;
-        dirs = direction.Undetermined;
+        dirs = directions.Undetermined;
         directionTV = t;
     }
 
@@ -39,7 +39,11 @@ public class MotionFSM {
     {
         count = countDefault;
         signalState = States.Waiting;
-        dirs = direction.Undetermined;
+        dirs = directions.Undetermined;
+    }
+
+    public directions getGesture() {
+        return dirs;
     }
 
     public void runFSM(float[] accVals)
@@ -53,22 +57,22 @@ public class MotionFSM {
                 //Log.d("FSM Says:", String.format("Waiting, Slope: %f", slopeX));
                 if( accVals[0] > threshHolds[0])
                 {
-                    dirs = direction.Right;
+                    dirs = directions.Right;
                     signalState = States.Rising;
                 }
                 else if( accVals[0] < -threshHolds[0])
                 {
-                    dirs = direction.Left;
+                    dirs = directions.Left;
                     signalState = States.Rising;
                 }
                 else if( accVals[1] > threshHolds[0])
                 {
-                    dirs = direction.Up;
+                    dirs = directions.Up;
                     signalState = States.Rising;
                 }
                 else if( accVals[1] < -threshHolds[0])
                 {
-                    dirs = direction.Down;
+                    dirs = directions.Down;
                     signalState = States.Rising;
                 }
                 break;
@@ -83,7 +87,7 @@ public class MotionFSM {
 
             case Rising:
                 Log.d("FSM Says:", "Rising");
-                if (dirs == direction.Right)
+                if (dirs == directions.Right)
                 {
                     if (slopeX <= 0)
                     {
@@ -93,12 +97,12 @@ public class MotionFSM {
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
                 }
-                else if (dirs == direction.Left)
+                else if (dirs == directions.Left)
                 {
                     if (slopeX >= 0)
                     {
@@ -108,12 +112,12 @@ public class MotionFSM {
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
                 }
-                else if (dirs == direction.Up)
+                else if (dirs == directions.Up)
                 {
                     if (slopeY <= 0)
                     {
@@ -123,12 +127,12 @@ public class MotionFSM {
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
                 }
-                else if (dirs == direction.Down)
+                else if (dirs == directions.Down)
                 {
                     if (slopeY >= 0)
                     {
@@ -138,7 +142,7 @@ public class MotionFSM {
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
@@ -153,47 +157,47 @@ public class MotionFSM {
                 if( count == 0)
                 {
                     Log.d("IN", "IN");
-                    if ( dirs == direction.Right)
+                    if ( dirs == directions.Right)
                     {
                         if (accVals[0] < threshHolds[2]) {
                             signalState = States.Determined;
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
-                    else if ( dirs == direction.Left)
+                    else if ( dirs == directions.Left)
                     {
                         if (accVals[0] > -threshHolds[2]) {
                             signalState = States.Determined;
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
-                    else if ( dirs == direction.Up)
+                    else if ( dirs == directions.Up)
                     {
                         if (accVals[1] < threshHolds[2]) {
                             signalState = States.Determined;
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }
-                    else if ( dirs == direction.Down)
+                    else if ( dirs == directions.Down)
                     {
                         if (accVals[1] > -threshHolds[2]) {
                             signalState = States.Determined;
                         }
                         else
                         {
-                            dirs = direction.Undetermined;
+                            dirs = directions.Undetermined;
                             signalState = States.Determined;
                         }
                     }

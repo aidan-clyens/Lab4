@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         tv2.setScaleY(1.5f);
         l.addView(tv2);
 
+        //  Timer and GameLoopTask Declaration
+        Timer timer = new Timer();
+        GameLoopTask GLoop = new GameLoopTask(this, this, l);
 
         // Declare a Sensor Manager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -52,14 +55,11 @@ public class MainActivity extends AppCompatActivity {
         MotionFSM accelFSM = new MotionFSM(tv2);
         // Acceleration Sensor Event Listener
         Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        aSel = new AccelerometerSensorEventListener(tv1, accData, accelFSM);
+        aSel = new AccelerometerSensorEventListener(tv1, accData, accelFSM, GLoop);
         sensorManager.registerListener(aSel, accSensor, sensorManager.SENSOR_DELAY_GAME);
 
 
-        Timer timer = new Timer();
-        GameLoopTask test = new GameLoopTask(this, this, l);
-
-        timer.schedule(test, 50, 50);
+        timer.schedule(GLoop, 50, 50);
 
     }
 }
