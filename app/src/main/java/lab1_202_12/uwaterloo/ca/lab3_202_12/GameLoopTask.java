@@ -13,8 +13,8 @@ import java.util.TimerTask;
 
 public class GameLoopTask extends TimerTask {
 
-    enum directions{Up, Down, Left, Right, Undetermined}
-    directions dir = directions.Undetermined;
+    enum directions{UP, DOWN, LEFT, RIGHT, NO_MOVEMENT}
+    directions dir = directions.NO_MOVEMENT;
 
     private Activity myActivity;
     private Context myContext;
@@ -47,6 +47,11 @@ public class GameLoopTask extends TimerTask {
                     }
                 }
         );
+    }
+
+    public void setDirection(directions d) {
+        dir = d;
+        Log.d("Direction", d.toString());
     }
 
     private void createBlock() {
