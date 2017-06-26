@@ -1,6 +1,7 @@
 package lab1_202_12.uwaterloo.ca.lab3_202_12;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Created by aidan on 6/23/2017.
@@ -9,9 +10,9 @@ import android.content.Context;
 public class GameBlock extends android.support.v7.widget.AppCompatImageView {
 
     private final float IMAGE_SCALE = 0.65f;
+    private GameLoopTask.directions myDir;
     private int myCoordX;
     private int myCoordY;
-
 
     public GameBlock(Context myContext, int coordX, int coordY) {
 
@@ -31,5 +32,11 @@ public class GameBlock extends android.support.v7.widget.AppCompatImageView {
 
         myCoordX = coordX;
         myCoordY = coordY;
+    }
+
+    public void setBlockDirection(GameLoopTask.directions d) {
+
+        myDir = d;
+        Log.d("Block Direction", d.toString());
     }
 }

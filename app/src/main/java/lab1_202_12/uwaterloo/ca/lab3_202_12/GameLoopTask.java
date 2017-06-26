@@ -19,6 +19,7 @@ public class GameLoopTask extends TimerTask {
     private Activity myActivity;
     private Context myContext;
     private RelativeLayout myRL;
+    private GameBlock newBlock;
 
 
     public GameLoopTask(Activity myAct, Context myCon, RelativeLayout rl) {
@@ -51,12 +52,13 @@ public class GameLoopTask extends TimerTask {
 
     public void setDirection(directions d) {
         dir = d;
-        Log.d("Direction", d.toString());
+        newBlock.setBlockDirection(d);
+//        Log.d("Direction", d.toString());
     }
 
     private void createBlock() {
 
-        GameBlock newBlock = new GameBlock(myContext, 1080, 1080);
+        newBlock = new GameBlock(myContext, 1080, 1080);
         myRL.addView(newBlock);
     }
 }
