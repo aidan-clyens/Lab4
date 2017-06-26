@@ -42,8 +42,9 @@ public class MotionFSM {
         dirs = directions.Undetermined;
     }
 
-    public directions getGesture() {
-        return dirs;
+    public String getGesture() {
+
+        return this.dirs.toString();
     }
 
     public void runFSM(float[] accVals)

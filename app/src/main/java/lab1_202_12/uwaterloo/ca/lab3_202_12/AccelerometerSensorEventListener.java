@@ -23,7 +23,7 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
 
     //  AccelerometerSensorEventListener Constructor
-    public AccelerometerSensorEventListener(TextView outputView, float data[][], MotionFSM acc,GameLoopTask myGL) {
+    public AccelerometerSensorEventListener(TextView outputView, float data[][], MotionFSM acc, GameLoopTask myGL) {
         output = outputView;
         vals = data;
         accellFSM = acc;
@@ -56,6 +56,25 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
             //  Smooth accelerometer readings
             accellFSM.runFSM(vals[0]);
+
+            //  Determine gesture to send to GameLoopTask
+            if(accellFSM.getGesture().equals("Up")) {
+                gl.setDirection(GameLoopTask.directions.UP);
+
+            } else if(accellFSM.getGesture().equals("Down")) {
+                gl.setDirection(GameLoopTask.directions.DOWN);
+
+            } else if(accellFSM.getGesture().equals("Right")) {
+                gl.setDirection(GameLoopTask.directions.RIGHT);
+
+            } else if(accellFSM.getGesture().equals("Left")) {
+                gl.setDirection(GameLoopTask.directions.LEFT);
+
+            } else {
+                gl.setDirection(GameLoopTask.directions.NO_MOVEMENT);
+
+            }
+
             output.setText(String.format("(%f, %f, %f)", vals[0][0], vals[0][1], vals[0][2]));
 
         }
