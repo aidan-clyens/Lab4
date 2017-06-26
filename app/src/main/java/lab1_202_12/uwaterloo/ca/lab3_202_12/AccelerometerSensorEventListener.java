@@ -20,6 +20,8 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
     private GameLoopTask gl;
 
+
+
     //  AccelerometerSensorEventListener Constructor
     public AccelerometerSensorEventListener(TextView outputView, float data[][], MotionFSM acc,GameLoopTask myGL) {
         output = outputView;
@@ -58,4 +60,5 @@ class AccelerometerSensorEventListener implements SensorEventListener {
 
         }
     }
+
 }

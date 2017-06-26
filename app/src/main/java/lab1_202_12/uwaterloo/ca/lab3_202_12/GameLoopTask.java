@@ -49,11 +49,6 @@ public class GameLoopTask extends TimerTask {
         );
     }
 
-    public void setDirection(directions d) {
-        dir = d;
-        Log.d("Direction", d.toString());
-    }
-
     private void createBlock() {
 
         GameBlock newBlock = new GameBlock(myContext, 1080, 1080);

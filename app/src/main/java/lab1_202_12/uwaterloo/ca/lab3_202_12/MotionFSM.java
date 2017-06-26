@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 public class MotionFSM {
 
-    enum States{ Waiting, Rising, Stable, Determined };
+    enum States{ Waiting, Rising, Stable, Determined }
     private States signalState;
 
 
-    enum directions{ Left, Right,Up, Down, Undetermined};
+    enum directions{ Left, Right,Up, Down, Undetermined}
     private directions dirs;
 
 
