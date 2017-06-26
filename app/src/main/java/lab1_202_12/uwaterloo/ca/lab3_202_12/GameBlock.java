@@ -10,6 +10,12 @@ import android.util.Log;
 public class GameBlock extends android.support.v7.widget.AppCompatImageView {
 
     private final float IMAGE_SCALE = 0.65f;
+    //  Boundary conditions, subtract 80 to fix offset
+    private final int TOP = 0 - 80;
+    private final int BOTTOM = 1080 - 80;
+    private final int LEFT = 0 - 80;
+    private final int RIGHT = 1080 - 80;
+
     private GameLoopTask.directions myDir;
     private int myCoordX;
     private int myCoordY;
@@ -22,13 +28,9 @@ public class GameBlock extends android.support.v7.widget.AppCompatImageView {
         this.setScaleX(IMAGE_SCALE);
         this.setScaleY(IMAGE_SCALE);
 
-        //  Top left corner, (x1,y1) = (0,0)
-        //  Top right corner, (x2,y2) = (1080, 0)
-        //  Bottom left corner, (x3,y3) = (0, 1080)
-        //  Bottom right corner, (x4,y4) = (1080, 1080)
-
         this.setX(coordX-80);
         this.setY(coordY-80);
+
 
         myCoordX = coordX;
         myCoordY = coordY;
@@ -38,5 +40,30 @@ public class GameBlock extends android.support.v7.widget.AppCompatImageView {
 
         myDir = d;
         Log.d("Block Direction", d.toString());
+    }
+
+    //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
+    public void move(GameLoopTask.directions d) {
+
+        switch(d) {
+            case DOWN:
+                this.setY(BOTTOM);
+                break;
+
+            case UP:
+                this.setY(TOP);
+                break;
+
+            case LEFT:
+                this.setX(LEFT);
+                break;
+
+            case RIGHT:
+                this.setX(RIGHT);
+                break;
+
+            default:
+                break;
+        }
     }
 }

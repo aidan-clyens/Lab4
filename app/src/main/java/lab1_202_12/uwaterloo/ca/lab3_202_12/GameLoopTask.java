@@ -30,21 +30,13 @@ public class GameLoopTask extends TimerTask {
         createBlock();
     }
 
-    private int i = 1;
-    private int sec = 0;
-
     public void run() {
         myActivity.runOnUiThread(
                 new Runnable() {
                     @Override
                     public void run() {
-                        //  Do something - Test
-                        if ((i % 20) == 0) {
-                            Log.d("Test", String.format("%d", sec));
-                            sec++;
-                        }
 
-                        i++;
+                        newBlock.move(dir);
                     }
                 }
         );
@@ -58,7 +50,7 @@ public class GameLoopTask extends TimerTask {
 
     private void createBlock() {
 
-        newBlock = new GameBlock(myContext, 1080, 1080);
+        newBlock = new GameBlock(myContext, 0, 0);
         myRL.addView(newBlock);
     }
 }
