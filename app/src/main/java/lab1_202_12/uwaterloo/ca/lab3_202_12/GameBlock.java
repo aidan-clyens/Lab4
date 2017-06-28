@@ -20,7 +20,7 @@ public class GameBlock extends android.support.v7.widget.AppCompatImageView {
     private int myCoordX;
     private int myCoordY;
 
-    private final int ACC = 10;
+    private final int ACC = 15;
     private int velocity = 0;
     private int[] position = new int[2];
 
