@@ -36,7 +36,7 @@ public class GameLoopTask extends TimerTask {
                     @Override
                     public void run() {
 
-                        newBlock.move(dir);
+                        newBlock.move();
                     }
                 }
         );

@@ -20,6 +20,12 @@ public class GameBlock extends android.support.v7.widget.AppCompatImageView {
     private int myCoordX;
     private int myCoordY;
 
+    private final int ACC = 10;
+    private int velocity = 0;
+    private int[] position = new int[2];
+
+    private boolean moving;
+
     public GameBlock(Context myContext, int coordX, int coordY) {
 
         super(myContext);
@@ -34,32 +40,80 @@ public class GameBlock extends android.support.v7.widget.AppCompatImageView {
 
         myCoordX = coordX;
         myCoordY = coordY;
+
+        moving = false;
     }
 
     public void setBlockDirection(GameLoopTask.directions d) {
 
-        myDir = d;
+        if(!moving) myDir = d;
         Log.d("Block Direction", d.toString());
     }
 
     //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
-    public void move(GameLoopTask.directions d) {
+    public void move() {
 
-        switch(d) {
+        switch(myDir) {
             case DOWN:
-                this.setY(BOTTOM);
+
+                moving = true;
+
+                position[1] += velocity;
+                velocity += ACC;
+
+                if(position[1] > BOTTOM) {
+                    position[1] = BOTTOM;
+                    velocity = 0;
+                    moving = false;
+                }
+
+                this.setY(position[1]);
                 break;
 
             case UP:
-                this.setY(TOP);
+
+                moving = true;
+
+                position[1] -= velocity;
+                velocity += ACC;
+
+                if(position[1] < TOP) {
+                    position[1] = TOP;
+                    velocity = 0;
+                    moving = false;
+                }
+
+                this.setY(position[1]);
                 break;
 
             case LEFT:
-                this.setX(LEFT);
+
+                moving = true;
+
+                position[0] -= velocity;
+                velocity += ACC;
+
+                if(position[0] < LEFT) {
+                    position[0] = LEFT;
+                    velocity = 0;
+                    moving = false;
+                }
+                this.setX(position[0]);
                 break;
 
             case RIGHT:
-                this.setX(RIGHT);
+
+                moving = true;
+
+                position[0] += velocity;
+                velocity += ACC;
+
+                if(position[0] > RIGHT) {
+                    position[0] = RIGHT;
+                    velocity = 0;
+                    moving = false;
+                }
+                this.setX(position[0]);
                 break;
 
             default:
