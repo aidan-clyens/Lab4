@@ -24,7 +24,7 @@ public class GameBlock extends GameBlockTemplate {
     private int velocity = 0;
     private int[] position = new int[2];
 
-    private boolean moving;
+    public boolean moving;
 
     public GameBlock(Context myContext, int coordX, int coordY) {
 
@@ -47,7 +47,7 @@ public class GameBlock extends GameBlockTemplate {
     public void setBlockDirection(GameLoopTask.directions d) {
 
         if(!moving) myDir = d;
-        Log.d("Block Direction", d.toString());
+//        Log.d("Block Direction", d.toString());
     }
 
     //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
