@@ -1,4 +1,4 @@
-package lab1_202_12.uwaterloo.ca.lab3_202_12;
+package lab1_202_12.uwaterloo.ca.lab4_202_12;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.Timer;
 
 import static android.R.color.black;
-import static android.R.color.white;
 
 public class MainActivity extends AppCompatActivity {
     //  Make the line graph, sensor event listeners, and array for accelerometer data global variables

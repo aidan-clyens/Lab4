@@ -1,8 +1,7 @@
-package lab1_202_12.uwaterloo.ca.lab3_202_12;
+package lab1_202_12.uwaterloo.ca.lab4_202_12;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import java.util.TimerTask;
