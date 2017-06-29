@@ -29,8 +29,6 @@ public class GameLoopTask extends TimerTask {
 
     private Random random = new Random();
 
-    private int i = 0;
-
 
     public GameLoopTask(Activity myAct, Context myCon, RelativeLayout rl) {
         myActivity = myAct;
@@ -45,6 +43,7 @@ public class GameLoopTask extends TimerTask {
                     @Override
                     public void run() {
 
+                        //  Move all existing Game Blocks at once
                         for(GameBlock gb : myGBList) {
 
                             gb.move();
