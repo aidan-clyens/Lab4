@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.TimerTask;
 
 /**
@@ -22,13 +23,18 @@ public class GameLoopTask extends TimerTask {
     private RelativeLayout myRL;
     private GameBlock newBlock;
 
+    private Random random = new Random();
+
 
     public GameLoopTask(Activity myAct, Context myCon, RelativeLayout rl) {
         myActivity = myAct;
         myContext = myCon;
         myRL = rl;
 
-        createBlock();
+        int x = random.nextInt(1080);
+        int y = random.nextInt(1080);
+
+        createBlock(x, y);
     }
 
     public void run() {
@@ -48,9 +54,9 @@ public class GameLoopTask extends TimerTask {
         newBlock.setBlockDirection(d);
     }
 
-    private void createBlock() {
+    private void createBlock(int xCoord, int yCoord) {
 
-        newBlock = new GameBlock(myContext, 0, 0);
+        newBlock = new GameBlock(myContext, xCoord, yCoord);
         myRL.addView(newBlock);
     }
 }
