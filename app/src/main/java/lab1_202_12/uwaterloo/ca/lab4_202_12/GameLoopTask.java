@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.RelativeLayout;
 
+import java.util.LinkedList;
 import java.util.TimerTask;
 
 /**
@@ -14,6 +15,7 @@ public class GameLoopTask extends TimerTask {
 
     enum directions{UP, DOWN, LEFT, RIGHT, NO_MOVEMENT}
     directions dir = directions.NO_MOVEMENT;
+    LinkedList myGBList = new LinkedList();
 
     private Activity myActivity;
     private Context myContext;

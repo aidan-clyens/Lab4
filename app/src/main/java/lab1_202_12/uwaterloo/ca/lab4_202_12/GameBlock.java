@@ -7,7 +7,7 @@ import android.util.Log;
  * Created by aidan on 6/23/2017.
  */
 
-public class GameBlock extends android.support.v7.widget.AppCompatImageView {
+public class GameBlock extends GameBlockTemplate {
 
     private final float IMAGE_SCALE = 0.65f;
     //  Boundary conditions, subtract 80 to fix offset
