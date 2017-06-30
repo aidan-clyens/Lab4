@@ -10,11 +10,6 @@ import android.util.Log;
 public class GameBlock extends GameBlockTemplate {
 
     private final float IMAGE_SCALE = 0.65f;
-    //  Boundary conditions, subtract 80 to fix offset
-    private final int TOP = 0 - 80;
-    private final int BOTTOM = 1080 - 80;
-    private final int LEFT = 0 - 80;
-    private final int RIGHT = 1080 - 80;
 
     private GameLoopTask.directions myDir;
     private int myCoordX;
@@ -34,20 +29,15 @@ public class GameBlock extends GameBlockTemplate {
         this.setScaleX(IMAGE_SCALE);
         this.setScaleY(IMAGE_SCALE);
 
-        this.setX(coordX-80);
-        this.setY(coordY-80);
-
-
-        myCoordX = coordX;
-        myCoordY = coordY;
+        this.setX(coordX);
+        this.setY(coordY);
 
         moving = false;
     }
 
     public void setBlockDirection(GameLoopTask.directions d) {
 
-        if(!moving) myDir = d;
-//        Log.d("Block Direction", d.toString());
+        if(!moving) myDir = d;  //  If the block is not currently moving, change it's direction
     }
 
     //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
@@ -56,64 +46,74 @@ public class GameBlock extends GameBlockTemplate {
         switch(myDir) {
             case DOWN:
 
-                moving = true;
+                moving = true;  //  The block is moving
 
                 position[1] += velocity;
                 velocity += ACC;
 
-                if(position[1] > BOTTOM) {
-                    position[1] = BOTTOM;
+                //  If the y-coord is outside of the BOTTOM boundary, set the y-position to the BOTTOM boundary and the velocity to 0
+                if(position[1] > GameLoopTask.BOTTOM) {
+                    position[1] = GameLoopTask.BOTTOM;
                     velocity = 0;
-                    moving = false;
+                    moving = false;     //  The block has stopped moving
                 }
 
                 this.setY(position[1]);
+
                 break;
 
             case UP:
 
-                moving = true;
+                moving = true;  //  The block is moving
 
                 position[1] -= velocity;
                 velocity += ACC;
 
-                if(position[1] < TOP) {
-                    position[1] = TOP;
+                //  If the y-coord is outside of the TOP boundary, set the y-position to the TOP boundary and the velocity to 0
+                if(position[1] < GameLoopTask.TOP) {
+                    position[1] = GameLoopTask.TOP;
                     velocity = 0;
-                    moving = false;
+                    moving = false;     //  The block has stopped moving
                 }
 
                 this.setY(position[1]);
+
                 break;
 
             case LEFT:
 
-                moving = true;
+                moving = true;  //  The block is moving
 
                 position[0] -= velocity;
                 velocity += ACC;
 
-                if(position[0] < LEFT) {
-                    position[0] = LEFT;
+                //  If the x-coordinate is outside of the LEFT boundary, set the y-position to the LEFT boundary and the velocity to 0
+                if(position[0] < GameLoopTask.LEFT) {
+                    position[0] = GameLoopTask.LEFT;
                     velocity = 0;
-                    moving = false;
+                    moving = false;     //  The block has stopped moving
                 }
+
                 this.setX(position[0]);
+
                 break;
 
             case RIGHT:
 
-                moving = true;
+                moving = true;  //  The block is moving
 
                 position[0] += velocity;
                 velocity += ACC;
 
-                if(position[0] > RIGHT) {
-                    position[0] = RIGHT;
+                //  If the x-coordinate is outside of the RIGHT boundary, set the y-position to the RIGHT boundary and the velocity to 0
+                if(position[0] > GameLoopTask.RIGHT) {
+                    position[0] = GameLoopTask.RIGHT;
                     velocity = 0;
-                    moving = false;
+                    moving = false;     //  The block has stopped moving
                 }
+
                 this.setX(position[0]);
+
                 break;
 
             default:

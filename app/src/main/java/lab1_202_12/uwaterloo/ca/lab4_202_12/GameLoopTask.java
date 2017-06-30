@@ -15,8 +15,17 @@ import java.util.TimerTask;
 
 public class GameLoopTask extends TimerTask {
 
+    protected static final int OFFSET = 80;
+    protected static final int TOP = 0 - OFFSET;
+    protected static final int LEFT = 0 - OFFSET;
+    protected static final int BOTTOM = 1080 - OFFSET;
+    protected static final int RIGHT = 1080 - OFFSET;
+
+    protected static final int SLOT_SEPARATION = 360;
+
     enum directions{UP, DOWN, LEFT, RIGHT, NO_MOVEMENT}
     directions dir = directions.NO_MOVEMENT;
+
     LinkedList<GameBlock> myGBList = new LinkedList<>();
 
     private Activity myActivity;
@@ -29,12 +38,17 @@ public class GameLoopTask extends TimerTask {
 
     private Random random = new Random();
 
+    private int coordX;
+    private int coordY;
+
 
     public GameLoopTask(Activity myAct, Context myCon, RelativeLayout rl) {
         myActivity = myAct;
         myContext = myCon;
         myRL = rl;
 
+
+        createBlock();
     }
 
     public void run() {
@@ -86,10 +100,16 @@ public class GameLoopTask extends TimerTask {
 
     private void createBlock() {
 
-        int x = random.nextInt(1080);
-        int y = random.nextInt(1080);
+        int x = random.nextInt(3);
+        int y = random.nextInt(3);
 
-        newBlock = new GameBlock(myContext, x, y);
+        coordX = (x * SLOT_SEPARATION) - OFFSET;
+        coordY = (y * SLOT_SEPARATION) - OFFSET;
+
+        Log.d("Position", String.format("(%d, %d)", coordX, coordY));
+
+
+        newBlock = new GameBlock(myContext, coordX, coordY);
         myRL.addView(newBlock);
         myGBList.add(newBlock);
     }
