@@ -51,6 +51,7 @@ public class GameLoopTask extends TimerTask {
         createBlock();
     }
 
+
     public void run() {
         myActivity.runOnUiThread(
                 new Runnable() {
@@ -67,9 +68,16 @@ public class GameLoopTask extends TimerTask {
         );
     }
 
+
     public void setDirection(directions d) {
 
         dir = d;
+
+        //  For each Game Block in the linked list, set the same direction for all of them
+        for(GameBlock gb : myGBList) {
+
+            gb.setBlockDirection(d);
+        }
 
         //  Test if Game Blocks are moving or not
         for(GameBlock gb : myGBList) {
@@ -90,27 +98,22 @@ public class GameLoopTask extends TimerTask {
             createdBlock = false;
         }
 
-        //  For each Game Block in the linked list, set the same direction for all of them
-        for(GameBlock gb : myGBList) {
-
-            gb.setBlockDirection(d);
-        }
-
     }
 
     private void createBlock() {
 
+        //  Choose a slot on the 4 by 4 gameboard
         int x = random.nextInt(3);
         int y = random.nextInt(3);
 
+        //  Determine the selected slot's coordinates
         coordX = (x * SLOT_SEPARATION) - OFFSET;
         coordY = (y * SLOT_SEPARATION) - OFFSET;
 
-        Log.d("Position", String.format("(%d, %d)", coordX, coordY));
+        //  Add new Game Block to board
+        newBlock = new GameBlock(myContext, myRL, coordX, coordY);
+        newBlock.setBlockDirection(directions.NO_MOVEMENT);
 
-
-        newBlock = new GameBlock(myContext, coordX, coordY);
-        myRL.addView(newBlock);
         myGBList.add(newBlock);
     }
 }

@@ -2,6 +2,12 @@ package lab1_202_12.uwaterloo.ca.lab4_202_12;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Random;
+
+import static android.R.color.black;
 
 /**
  * Created by aidan on 6/23/2017.
@@ -21,9 +27,17 @@ public class GameBlock extends GameBlockTemplate {
 
     public boolean moving;
 
-    public GameBlock(Context myContext, int coordX, int coordY) {
+    private RelativeLayout myRL;
+    private TextView tv;
+    private Random ran;
+    private int blockNumber;
+
+
+    public GameBlock(Context myContext, RelativeLayout RL, int coordX, int coordY) {
 
         super(myContext);
+
+        ran = new Random();
 
         this.setImageResource(R.drawable.gameblock);
         this.setScaleX(IMAGE_SCALE);
@@ -32,13 +46,32 @@ public class GameBlock extends GameBlockTemplate {
         this.setX(coordX);
         this.setY(coordY);
 
+        tv = new TextView(myContext);
+
+        blockNumber = (ran.nextInt(2) + 1) * 2;
+
+        tv.setX(coordX+250);
+        tv.setY(coordY+225);
+        tv.setScaleX(3f);
+        tv.setScaleY(3f);
+        tv.setText(String.format("%d", blockNumber));
+        tv.setTextColor(getResources().getColor(black));
+        tv.bringToFront();
+
+        RL.addView(this);
+        RL.addView(tv);
+
+        myRL = RL;
+
         moving = false;
     }
+
 
     public void setBlockDirection(GameLoopTask.directions d) {
 
         if(!moving) myDir = d;  //  If the block is not currently moving, change it's direction
     }
+
 
     //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
     public void move() {
@@ -59,6 +92,7 @@ public class GameBlock extends GameBlockTemplate {
                 }
 
                 this.setY(position[1]);
+                tv.setY(position[1]+225);
 
                 break;
 
@@ -77,6 +111,7 @@ public class GameBlock extends GameBlockTemplate {
                 }
 
                 this.setY(position[1]);
+                tv.setY(position[1]+225);
 
                 break;
 
@@ -95,6 +130,7 @@ public class GameBlock extends GameBlockTemplate {
                 }
 
                 this.setX(position[0]);
+                tv.setX(position[0]+250);
 
                 break;
 
@@ -113,6 +149,7 @@ public class GameBlock extends GameBlockTemplate {
                 }
 
                 this.setX(position[0]);
+                tv.setX(position[0]+250);
 
                 break;
 
