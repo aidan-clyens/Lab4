@@ -21,6 +21,7 @@ public class GameBlock extends GameBlockTemplate {
     private int myCoordX;
     private int myCoordY;
 
+    //  Used for the moving animation
     private final int ACC = 15;
     private int velocity = 0;
     private int[] position = new int[2];
@@ -39,6 +40,7 @@ public class GameBlock extends GameBlockTemplate {
 
         ran = new Random();
 
+        //  Set the image resourse and scale of the newly created Game Block
         this.setImageResource(R.drawable.gameblock);
         this.setScaleX(IMAGE_SCALE);
         this.setScaleY(IMAGE_SCALE);
@@ -46,10 +48,11 @@ public class GameBlock extends GameBlockTemplate {
         this.setX(coordX);
         this.setY(coordY);
 
-        tv = new TextView(myContext);
-
+        //  Randomly choose 2 or 4 to display on the Game Black
         blockNumber = (ran.nextInt(2) + 1) * 2;
 
+        //  Create a TextView to attach to the GameBlock, displaying the block number
+        tv = new TextView(myContext);
         tv.setX(coordX+250);
         tv.setY(coordY+225);
         tv.setScaleX(3f);
@@ -63,6 +66,7 @@ public class GameBlock extends GameBlockTemplate {
 
         myRL = RL;
 
+        //  When the Game Block is created, it is not moving
         moving = false;
     }
 

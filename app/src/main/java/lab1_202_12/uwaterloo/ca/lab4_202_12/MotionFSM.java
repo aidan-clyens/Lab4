@@ -17,7 +17,7 @@ public class MotionFSM {
     private directions dirs;
 
 
-    private final float[] threshHolds = {0.5f, 1f, 0.4f};
+    private final float[] threshHolds = {2f, 3f, 0.4f};
 
     private int countDefault = 30;
 
