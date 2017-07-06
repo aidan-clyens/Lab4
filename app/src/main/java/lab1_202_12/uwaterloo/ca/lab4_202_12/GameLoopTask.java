@@ -26,7 +26,7 @@ public class GameLoopTask extends TimerTask {
     enum directions{UP, DOWN, LEFT, RIGHT, NO_MOVEMENT}
     directions dir = directions.NO_MOVEMENT;
 
-    LinkedList<GameBlock> myGBList = new LinkedList<>();
+    private LinkedList<GameBlock> myGBList = new LinkedList<>();
 
     private Activity myActivity;
     private Context myContext;
@@ -40,6 +40,9 @@ public class GameLoopTask extends TimerTask {
 
     private int coordX;
     private int coordY;
+
+    private int targetPosX;
+    private int targetPosY;
 
 
     public GameLoopTask(Activity myAct, Context myCon, RelativeLayout rl) {
@@ -72,20 +75,34 @@ public class GameLoopTask extends TimerTask {
     public void setDirection(directions d) {
 
         dir = d;
+        targetPosX = 0;
+        targetPosY = 0;
+
+        //  Set target directions
+        switch (d) {
+            case UP:
+                targetPosY = TOP;
+                break;
+            case DOWN:
+                targetPosY = BOTTOM;
+                break;
+            case RIGHT:
+                targetPosX = RIGHT;
+                break;
+            case LEFT:
+                targetPosX = LEFT;
+                break;
+            case NO_MOVEMENT:
+                break;
+            default:
+                break;
+        }
 
         //  For each Game Block in the linked list, set the same direction for all of them
-        for(GameBlock gb : myGBList) {
+        for(GameBlock gb : myGBList) gb.setBlockDirection(d, targetPosX, targetPosY);
 
-            gb.setBlockDirection(d);
-        }
-
-        //  Test if Game Blocks are moving or not
-        for(GameBlock gb : myGBList) {
-
-            if(gb.moving) blockMoving = true;
-            else blockMoving = false;
-
-        }
+        //  Test if any Game Blocks are moving or not
+        for(GameBlock gb : myGBList) blockMoving = gb.moving;
 
         //  Create one new Game Block if a gesture has been used and if the existing Game Blocks are not already moving
         if(d != directions.NO_MOVEMENT && !createdBlock && !blockMoving) {
@@ -100,6 +117,22 @@ public class GameLoopTask extends TimerTask {
 
     }
 
+    private boolean isOccupied(int x, int y) {
+        //  Check the target positions of all Game Blocks.
+        //  Return true if the slot is occupied, false if not
+
+        int[] targetPosition;
+        boolean occupied = false;
+
+        for (GameBlock gb : myGBList) {
+            targetPosition = gb.getTargetPosition();
+
+            occupied = (targetPosition[0] == x && targetPosition[1] == y);
+        }
+
+        return occupied;
+    }
+
     private void createBlock() {
 
         //  Choose a slot on the 4 by 4 gameboard
@@ -112,7 +145,7 @@ public class GameLoopTask extends TimerTask {
 
         //  Add new Game Block to board
         newBlock = new GameBlock(myContext, myRL, coordX, coordY);
-        newBlock.setBlockDirection(directions.NO_MOVEMENT);
+        newBlock.setBlockDirection(directions.NO_MOVEMENT, targetPosX, targetPosY);
 
         myGBList.add(newBlock);
     }

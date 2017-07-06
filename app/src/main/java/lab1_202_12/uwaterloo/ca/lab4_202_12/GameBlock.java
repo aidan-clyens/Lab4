@@ -30,15 +30,17 @@ public class GameBlock extends GameBlockTemplate {
 
     private RelativeLayout myRL;
     private TextView tv;
-    private Random ran;
     private int blockNumber;
+
+    //  Target positions
+    private int[] targetPosition = new int[2];
 
 
     public GameBlock(Context myContext, RelativeLayout RL, int coordX, int coordY) {
 
         super(myContext);
 
-        ran = new Random();
+        Random ran = new Random();
 
         //  Set the image resourse and scale of the newly created Game Block
         this.setImageResource(R.drawable.gameblock);
@@ -71,14 +73,37 @@ public class GameBlock extends GameBlockTemplate {
     }
 
 
-    public void setBlockDirection(GameLoopTask.directions d) {
+    public void setBlockDirection(GameLoopTask.directions d, int targetPosX, int targetPosY) {
+        //  Set block direction and target position
+        //  Create temporary field to track the number of blocks in between current and target position
+        //  Create temporary field to track the number of slots along the way
+        //  Original target position is boundary
+
+        targetPosition[0] = targetPosX;
+        targetPosition[1] = targetPosY;
+
+        //  1) Check if the target position is occupied, if yes, increment blockCount
+        //  2) Increment slotCount for all slots checked
+        //  3) Check the coordinate 1 slot closer to the current location of the Game Block, increment blockCount and slotCount if needed
+        //  4) Calculate the number of empty slots by subtracting blockCount from slotCount, use to determine correct target position
 
         if(!moving) myDir = d;  //  If the block is not currently moving, change it's direction
+    }
+
+    public void getCurrentPosition() {
+        //  Returns current position
+    }
+
+    public int[] getTargetPosition() {
+        //  Returns target position
+
+        return this.targetPosition;
     }
 
 
     //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
     public void move() {
+        //  Instead of setting position to boundaries, use target position
 
         switch(myDir) {
             case DOWN:

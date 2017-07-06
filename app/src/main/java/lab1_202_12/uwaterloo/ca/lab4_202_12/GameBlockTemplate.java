@@ -12,7 +12,7 @@ public abstract class GameBlockTemplate extends AppCompatImageView {  //new abst
         super(context);
     }//constructor
 
-    abstract void setBlockDirection(GameLoopTask.directions d);
+    abstract void setBlockDirection(GameLoopTask.directions d, int targetPosX, int targetPosY);
 
     abstract void move();
 }
