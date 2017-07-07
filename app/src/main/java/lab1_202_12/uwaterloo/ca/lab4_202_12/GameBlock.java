@@ -79,8 +79,16 @@ public class GameBlock extends GameBlockTemplate {
         //  Create temporary field to track the number of slots along the way
         //  Original target position is boundary
 
-        targetPosition[0] = targetPosX;
-        targetPosition[1] = targetPosY;
+//        if(d == GameLoopTask.directions.UP || d == GameLoopTask.directions.DOWN) {
+//
+//            targetPosition[0] = getCurrentPosition()[0];
+//            targetPosition[1] = targetPosY;
+//
+//        } else if(d == GameLoopTask.directions.LEFT || d == GameLoopTask.directions.RIGHT) {
+//
+//            targetPosition[0] = targetPosX;
+//            targetPosition[1] = getCurrentPosition()[1];
+//        }
 
         //  1) Check if the target position is occupied, if yes, increment blockCount
         //  2) Increment slotCount for all slots checked
@@ -90,12 +98,18 @@ public class GameBlock extends GameBlockTemplate {
         if(!moving) myDir = d;  //  If the block is not currently moving, change it's direction
     }
 
-    public void getCurrentPosition() {
+    public int[] getCurrentPosition() {
         //  Returns current position
+        Log.d("This Target Pos", String.format("(%d, %d)", position[0], position[1]));
+
+        return this.position;
     }
 
     public int[] getTargetPosition() {
         //  Returns target position
+        //  Target position must have correct x and y components
+
+//        Log.d("This Target Pos", String.format("(%d, %d)", targetPosition[0], targetPosition[1]));
 
         return this.targetPosition;
     }
@@ -104,6 +118,7 @@ public class GameBlock extends GameBlockTemplate {
     //  Using the direction received from the Accelerometer Event Handler, determine x and y coordinates of block
     public void move() {
         //  Instead of setting position to boundaries, use target position
+        int[] x = this.getCurrentPosition();
 
         switch(myDir) {
             case DOWN:

@@ -130,10 +130,36 @@ public class GameLoopTask extends TimerTask {
             occupied = (targetPosition[0] == x && targetPosition[1] == y);
         }
 
+//        if(occupied) Log.d("Occupied", "TRUE");
+//        else Log.d("Occupied", "FALSE");
         return occupied;
     }
 
+
     private void createBlock() {
+        //  Do not create a new block in an occupied slot
+        //  Search for unoccupied slots
+        int blockCount = 0;
+        int[] coords = new int[2];
+
+        boolean[][] slotOccupied =   {{false, false, false},
+                                      {false, false, false},
+                                      {false, false, false}};
+
+        for(int i=0; i<3; i++) {
+
+            coords[1] = LEFT + i*SLOT_SEPARATION;
+
+            for(int j=0; j<3; j++) {
+
+                coords[0] = TOP + j*SLOT_SEPARATION;
+
+                slotOccupied[i][j] = isOccupied(coords[0], coords[1]);
+                if(slotOccupied[i][j]) blockCount++;
+            }
+        }
+
+        Log.d("Block Count", String.format("%d", blockCount));
 
         //  Choose a slot on the 4 by 4 gameboard
         int x = random.nextInt(3);
@@ -146,6 +172,9 @@ public class GameLoopTask extends TimerTask {
         //  Add new Game Block to board
         newBlock = new GameBlock(myContext, myRL, coordX, coordY);
         newBlock.setBlockDirection(directions.NO_MOVEMENT, targetPosX, targetPosY);
+
+//        Log.d("Target Pos", String.format("(%d, %d)", targetPosX, targetPosY));
+
 
         myGBList.add(newBlock);
     }
