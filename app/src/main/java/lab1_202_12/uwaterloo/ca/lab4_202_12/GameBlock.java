@@ -88,11 +88,11 @@ public class GameBlock extends GameBlockTemplate {
         if(d == GameLoopTask.directions.UP || d == GameLoopTask.directions.DOWN) {
 
             targetPosition[0] = getCurrentPosition()[0];
-            targetPosition[1] = (targetPosY + GameLoopTask.OFFSET) / GameLoopTask.SLOT_SEPARATION;
+            targetPosition[1] = targetPosY;
 
         } else if(d == GameLoopTask.directions.LEFT || d == GameLoopTask.directions.RIGHT) {
 
-            targetPosition[0] = (targetPosX + GameLoopTask.OFFSET) / GameLoopTask.SLOT_SEPARATION;
+            targetPosition[0] = targetPosX;
             targetPosition[1] = getCurrentPosition()[1];
         }
 
@@ -128,8 +128,6 @@ public class GameBlock extends GameBlockTemplate {
 
         targetPosition[0] = (targetPosition[0] - GameLoopTask.OFFSET) / GameLoopTask.SLOT_SEPARATION;
         targetPosition[1] = (targetPosition[1] - GameLoopTask.OFFSET) / GameLoopTask.SLOT_SEPARATION;
-
-        Log.d("Target Slot", String.format("(%d, %d)", targetPosition[0], targetPosition[1]));
 
         return this.targetPosition;
     }

@@ -81,16 +81,16 @@ public class GameLoopTask extends TimerTask {
         //  Set target directions
         switch (d) {
             case UP:
-                targetPosY = TOP;
+                targetPosY = (TOP + OFFSET) / SLOT_SEPARATION;
                 break;
             case DOWN:
-                targetPosY = BOTTOM;
+                targetPosY = (BOTTOM + OFFSET) / SLOT_SEPARATION;
                 break;
             case RIGHT:
-                targetPosX = RIGHT;
+                targetPosX = (RIGHT + OFFSET) / SLOT_SEPARATION;
                 break;
             case LEFT:
-                targetPosX = LEFT;
+                targetPosX = (LEFT + OFFSET) / SLOT_SEPARATION;
                 break;
             case NO_MOVEMENT:
                 break;
@@ -107,7 +107,7 @@ public class GameLoopTask extends TimerTask {
         //  Create one new Game Block if a gesture has been used and if the existing Game Blocks are not already moving
         if(d != directions.NO_MOVEMENT && !createdBlock && !blockMoving) {
 
-//            createBlock();
+            createBlock();
             createdBlock = true;
 
         } else if(d == directions.NO_MOVEMENT) {
@@ -120,7 +120,13 @@ public class GameLoopTask extends TimerTask {
     private boolean isOccupied(int x, int y) {
         //  Check the target positions of all Game Blocks.
         //  Return true if the slot is occupied, false if not
+        //  Take x: 0 to 3, and y: 0 to 3 as inputs
         boolean occupied = false;
+
+        for(GameBlock gb : myGBList) {
+
+            occupied = (x == gb.getTargetPosition()[0] && y == gb.getTargetPosition()[1]);
+        }
 
         return occupied;
     }
@@ -131,6 +137,7 @@ public class GameLoopTask extends TimerTask {
         int x = random.nextInt(3);
         int y = random.nextInt(3);
 
+
         //  Determine the selected slot's coordinates
         coordX = (x * SLOT_SEPARATION) - OFFSET;
         coordY = (y * SLOT_SEPARATION) - OFFSET;
@@ -138,9 +145,6 @@ public class GameLoopTask extends TimerTask {
         //  Add new Game Block to board
         newBlock = new GameBlock(myContext, myRL, coordX, coordY);
         newBlock.setBlockDirection(directions.NO_MOVEMENT, targetPosX, targetPosY);
-
-//        Log.d("Target Pos", String.format("(%d, %d)", targetPosX, targetPosY));
-
 
         myGBList.add(newBlock);
     }
